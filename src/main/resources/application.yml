@@ -15,4 +15,4 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
-  org.hibernate.tyep: trace
+#  org.hibernate.tyep: trace
