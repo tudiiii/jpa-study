@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +49,12 @@ public class OrderSimpleApiController {
     @GetMapping("/api/v2/simple-orders")
     public List<SimpleOrderDto> ordersV2() {
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
-        return orders.stream()
-                .map(SimpleOrderDto::new)
-                .collect(Collectors.toList());
+        List<SimpleOrderDto> list = new ArrayList<>();
+        for (Order order : orders) {
+            SimpleOrderDto simpleOrderDto = new SimpleOrderDto(order);
+            list.add(simpleOrderDto);
+        }
+        return list;
     }
 
     /**
